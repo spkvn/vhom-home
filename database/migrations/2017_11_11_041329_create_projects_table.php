@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->text('description');
             $table->longText('body');
             $table->string('image_path',191);
-            $table->string('URL', 191);
+            $table->string('slug',191);
             $table->boolean('active');
             $table->timestamps();
         });
