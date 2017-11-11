@@ -6,7 +6,7 @@
     </div>
     <div class="top-bar-right">
         <ul class="menu">
-            <li>Administration Button</li>
+            <li><a href="{{route('admin.project.index')}}"> Projects </a></li>
         </ul>
     </div>
 </div>
