@@ -51,7 +51,7 @@
                 <div class="form__row">
                     {!! Form::label('image', 'Image:') !!}
                     {!! Form::file('image',
-                            (isset($record) ? $record->image_path : null ),
+                            null,
                             [
                                 'class' => ($errors->has('image') ? 'is-invalid-input' : '')
                             ]

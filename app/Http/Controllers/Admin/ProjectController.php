@@ -28,21 +28,26 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         return view('admin.project.edit')
-            ->with('project',$project);
+            ->with('record', $project)
+            ->with('base', $this->base);
     }
 
     public function store(ProjectRequest $request)
     {
-        if(ProjectService::save($request))
+        if(ProjectService::save(null, $request))
         {
             return redirect()
                 ->route('admin.project.index');
         }
     }
 
-    public function update(ProjectRequest $request)
+    public function update(Project $project, ProjectRequest $request)
     {
-        dd('passed request validation');
+        if(ProjectService::save($project,$request))
+        {
+            return redirect()
+                ->route('admin.project.index');
+        }
     }
 
     public function delete(Project $project)

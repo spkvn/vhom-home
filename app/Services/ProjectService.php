@@ -7,17 +7,27 @@ use VhomHome\Models\Project;
 
 class ProjectService
 {
-    public static function save(ProjectRequest $projectRequest)
+    public static function save(Project $project = null, ProjectRequest $projectRequest = null)
     {
-        $path = $projectRequest->file('image')->store('projects/');
+        if($project == null)
+        {
+            $project = new Project();
+        }
 
-        $project = new Project();
+        if($projectRequest != null)
+        {
+            $image = $projectRequest->file('image');
+            $slug = str_slug(request('title'));
+            $filename = $slug.".".$image->getClientOriginalExtension();
+            $image->storeAs('public/projects',$filename);
 
-        $project->image_path = $path;
-        $project->title = $projectRequest->input('title');
-        $project->slug = str_slug($projectRequest->input('title'));
-        $project->description = $projectRequest->input('description');
-        $project->body = $projectRequest->input('body');
+            $project->image_path = 'storage/projects/'.$filename;
+        }
+
+        $project->title = request('title');
+        $project->slug = str_slug(request('title'));
+        $project->description = request('description');
+        $project->body = request('body');
         $project->active = 1;
 
         $project->save();
