@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.site')
 
 @section('content')
     <div class="row">
         <div class="columns">
-            <h1>You're logged in.</h1>
+            <h1>Public home page</h1>
         </div>
     </div>
 @endsection

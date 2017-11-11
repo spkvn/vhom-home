@@ -11,6 +11,11 @@
 |
 */
 
+Route::group(['as'=>'admin.','middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+    Route::get('/', 'AdminController@index')->name('index');
+});
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
