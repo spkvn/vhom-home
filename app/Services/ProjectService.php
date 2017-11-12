@@ -4,6 +4,7 @@ namespace VhomHome\Services;
 
 use VhomHome\Http\Requests\ProjectRequest;
 use VhomHome\Models\Project;
+use VhomHome\Models\Tag;
 
 class ProjectService
 {
@@ -31,7 +32,25 @@ class ProjectService
         $project->project_url = request('project_url');
 
         $project->save();
+        self::handleTags(request('tags'), $project);
 
         return true;
+    }
+
+    private static function handleTags($tags, $project)
+    {
+        //delete all taggable records for this project
+        $project->tags()->detach();
+
+        //get tags from the input
+        $tags = explode(',', $tags);
+
+        //save each of the tags we have in input.
+        //probably too many db operations, so not good, but can't find the right way to do it.
+        foreach($tags as $tag)
+        {
+            $tag = Tag::where('name', '=', $tag)->first();
+            $tag->projects()->save($project);
+        }
     }
 }

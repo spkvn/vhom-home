@@ -22,6 +22,11 @@
                     </h2>
                     <p><strong>{{$project->description}}</strong></p>
                     <p>{{$project->body}}</p>
+                    <p>
+                        @foreach($project->tags as $tag)
+                            <span class="label secondary">{{$tag->name}}</span>
+                        @endforeach
+                    </p>
                 </div>
                 <div class="columns small-5">
                     <div class="project__image__container">

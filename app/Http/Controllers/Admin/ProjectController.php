@@ -29,8 +29,8 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $tags = Tag::all()->pluck('name');
-        $relatedTags = $project->tags()->pluck('name');
+        $tags = Tag::all();
+        $relatedTags = $project->tags;
        // dd($relatedTags);
         return view('admin.project.edit')
             ->with('record', $project)
