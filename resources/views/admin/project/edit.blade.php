@@ -81,6 +81,7 @@
     </div>
 
     <!--Selectize dataset -->
+    @if(isset($tags))
     <script>
         var tags = [
             @foreach ($tags as $tag)
@@ -102,4 +103,5 @@
             @endforeach
         });
     </script>
+    @endif
 @endsection
