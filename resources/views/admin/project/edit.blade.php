@@ -23,6 +23,19 @@
                 </div>
 
                 <div class="form__row">
+                    {!! Form::label('project_url', 'Project URL:') !!}
+                    {!! Form::text('project_url',
+                            (isset($record) ? $record->project_url : null ),
+                            [
+                                'placeholder' => 'Enter Project URL',
+                                'class' => ($errors->has('project_url') ? 'is-invalid-input' : '')
+                            ]
+                        )
+                    !!}
+                    {!! $errors->first('project_url', '<span class="form-error is-visible">:message</span>') !!}
+                </div>
+                
+                <div class="form__row">
                     {!! Form::label('description', 'Description:') !!}
                     {!! Form::textarea('description',
                             (isset($record) ? $record->description : null ),

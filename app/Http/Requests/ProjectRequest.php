@@ -26,7 +26,8 @@ class ProjectRequest extends FormRequest
             'title' => 'required|max:191',
             'description' => 'required',
             'body' => 'required',
-            'image' => 'required|image'
+            'image' => 'image',
+            'project_url' => 'URL'
         ];
     }
 }

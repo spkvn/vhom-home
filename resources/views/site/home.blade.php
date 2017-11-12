@@ -17,8 +17,11 @@
         @foreach($projects as $project)
             <div class="row project__div ">
                 <div class="columns small-7">
-                    <h2>{{$project->title}}</h2>
-                    <p>{{$project->description}}</p>
+                    <h2>
+                        <a href="{{$project->project_url}}">{{$project->title}}</a>
+                    </h2>
+                    <p><strong>{{$project->description}}</strong></p>
+                    <p>{{$project->body}}</p>
                 </div>
                 <div class="columns small-5">
                     <div class="project__image__container">
