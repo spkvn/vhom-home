@@ -34,7 +34,11 @@
                     !!}
                     {!! $errors->first('project_url', '<span class="form-error is-visible">:message</span>') !!}
                 </div>
-                
+
+                <!-- selectize input -->
+                {!! Form::label('tags','Tags:') !!}
+                <input type="text" name="tags" id="tags">
+
                 <div class="form__row">
                     {!! Form::label('description', 'Description:') !!}
                     {!! Form::textarea('description',
@@ -75,4 +79,55 @@
             </fieldset>
         </div>
     </div>
+    <!--Selectize dataset -->
+    <script>
+        var tags = [
+                @foreach ($tags as $tag)
+            {tag: "{{$tag}}" },
+            @endforeach
+        ];
+
+        var selectize = document.getElementById('tags').selectize();
+        @foreach($relatedTags as $relatedTag)
+            selectize.addItem({tag: "{{$relatedTag}}"});
+        @endforeach
+
+        {{--var relatedTags = [--}}
+            {{--@foreach($relatedTags as $relatedTag)--}}
+                {{--{tag: "{{$relatedTag}}"},--}}
+            {{--@endforeach--}}
+        {{--];--}}
+        {{--var selectize = $('#tags').selectize();--}}
+
+        {{--function addItemToSelectize(selectize, item)--}}
+        {{--{--}}
+            {{--selectize.addItem(item);--}}
+        {{--}--}}
+
+        {{--relatedTags.forEach(addItemToSelectize(selectize, item));--}}
+
+        {{--$(document).ready(function() {--}}
+            {{--var selectize = $('#tags').selectize--}}
+            {{--(--}}
+                {{--{--}}
+                    {{--delimiter: ',',--}}
+                    {{--persist: false,--}}
+                    {{--valueField: 'tag',--}}
+                    {{--labelField: 'tag',--}}
+                    {{--searchField: 'tag',--}}
+                    {{--options: tags,--}}
+                    {{--create: function (input) {--}}
+                        {{--return {--}}
+                            {{--tag: input--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--);--}}
+                {{--@foreach($relatedTags as $relatedTag)--}}
+            {{--{--}}
+                {{--selectize.addItem({{$relatedTag}});--}}
+            {{--}--}}
+            {{--@endforeach--}}
+        {{--});--}}
+    </script>
 @endsection

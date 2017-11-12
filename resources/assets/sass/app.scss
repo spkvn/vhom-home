@@ -5,7 +5,10 @@
 // Variables
 @import "settings";
 
-// Bootstrap
+// Selectize bootstrap
+@import "../../../node_modules/selectize/dist/css/selectize.bootstrap3";
+
+// Foundation
 @import "../../../node_modules/foundation-sites/assets/foundation";
 @include foundation-everything(false);
 
