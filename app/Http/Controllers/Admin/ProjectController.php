@@ -23,8 +23,12 @@ class ProjectController extends Controller
 
     public function create()
     {
+        $tags = Tag::all();
+        $relatedTags = $project->tags;
         return view('admin.project.edit')
-            ->with('base', $this->base);
+            ->with('base', $this->base)
+            ->with('tags', $tags)
+            ->with('relatedTags', $relatedTags);
     }
 
     public function edit(Project $project)
