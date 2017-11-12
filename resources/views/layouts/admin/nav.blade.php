@@ -9,4 +9,9 @@
             <li><a href="{{route('admin.project.index')}}"> Projects </a></li>
         </ul>
     </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><a href="{{route('admin.tag.index')}}"> Tags </a></li>
+        </ul>
+    </div>
 </div>

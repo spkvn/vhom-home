@@ -14,7 +14,7 @@
 Route::group(['as'=>'admin.','middleware' => 'auth.admin', 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('/', 'AdminController@index')->name('index');
     Route::resource('project', 'ProjectController');
-
+    Route::resource('tag', 'TagController');
 });
 
 Auth::routes();
