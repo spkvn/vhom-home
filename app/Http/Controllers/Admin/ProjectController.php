@@ -16,7 +16,8 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         return view('admin.project.grid')
-            ->with('projects', $projects);
+            ->with('records', $projects)
+            ->with('base', $this->base);
     }
 
     public function create()
@@ -50,8 +51,9 @@ class ProjectController extends Controller
         }
     }
 
-    public function delete(Project $project)
+    public function destroy(Project $project)
     {
-        //nothing
+        $project->delete();
+        return redirect()->route('admin.project.index');
     }
 }

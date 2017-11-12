@@ -177,6 +177,7 @@ return [
         VhomHome\Providers\EventServiceProvider::class,
         VhomHome\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        VhomHome\Providers\MacroServiceProvider::class
 
     ],
 
