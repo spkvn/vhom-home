@@ -98,9 +98,11 @@
 
             var selectize_tags = $('#tags')[0].selectize;
             selectize_tags.addOption(tags);
-            @foreach ($relatedTags as $relatedTag)
-                selectize_tags.addItem('{{$relatedTag->name}}');
-            @endforeach
+            @if(isset($relatedTags))
+                @foreach ($relatedTags as $relatedTag)
+                    selectize_tags.addItem('{{$relatedTag->name}}');
+                @endforeach
+            @endif
         });
     </script>
     @endif
