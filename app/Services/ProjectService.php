@@ -45,11 +45,9 @@ class ProjectService
         //get tags from the input
         $tags = explode(',', $tags);
 
-        //save each of the tags we have in input.
-        //probably too many db operations, so not good, but can't find the right way to do it.
         foreach($tags as $tag)
         {
-            $tag = Tag::where('name', '=', $tag)->first();
+            $tag = Tag::find($tag)->first();
             $tag->projects()->save($project);
         }
     }

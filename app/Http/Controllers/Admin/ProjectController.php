@@ -33,6 +33,7 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $relatedTags = $project->tags;
+//        dd($relatedTags);
        // dd($relatedTags);
         return view('admin.project.edit')
             ->with('record', $project)

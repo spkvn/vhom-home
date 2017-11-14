@@ -11638,6 +11638,165 @@ const Nest = {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Touch; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+//**************************************************
+//**Work inspired by multiple jquery swipe plugins**
+//**Done by Yohai Ararat ***************************
+//**************************************************
+
+
+
+var Touch = {};
+
+var startPosX,
+    startPosY,
+    startTime,
+    elapsedTime,
+    isMoving = false;
+
+function onTouchEnd() {
+  //  alert(this);
+  this.removeEventListener('touchmove', onTouchMove);
+  this.removeEventListener('touchend', onTouchEnd);
+  isMoving = false;
+}
+
+function onTouchMove(e) {
+  if (__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.preventDefault) { e.preventDefault(); }
+  if(isMoving) {
+    var x = e.touches[0].pageX;
+    var y = e.touches[0].pageY;
+    var dx = startPosX - x;
+    var dy = startPosY - y;
+    var dir;
+    elapsedTime = new Date().getTime() - startTime;
+    if(Math.abs(dx) >= __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.moveThreshold && elapsedTime <= __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.timeThreshold) {
+      dir = dx > 0 ? 'left' : 'right';
+    }
+    // else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
+    //   dir = dy > 0 ? 'down' : 'up';
+    // }
+    if(dir) {
+      e.preventDefault();
+      onTouchEnd.call(this);
+      __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).trigger('swipe', dir).trigger(`swipe${dir}`);
+    }
+  }
+}
+
+function onTouchStart(e) {
+  if (e.touches.length == 1) {
+    startPosX = e.touches[0].pageX;
+    startPosY = e.touches[0].pageY;
+    isMoving = true;
+    startTime = new Date().getTime();
+    this.addEventListener('touchmove', onTouchMove, false);
+    this.addEventListener('touchend', onTouchEnd, false);
+  }
+}
+
+function init() {
+  this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
+}
+
+function teardown() {
+  this.removeEventListener('touchstart', onTouchStart);
+}
+
+class SpotSwipe {
+  constructor($) {
+    this.version = '1.0.0';
+    this.enabled = 'ontouchstart' in document.documentElement;
+    this.preventDefault = false;
+    this.moveThreshold = 75;
+    this.timeThreshold = 200;
+    this.$ = $;
+    this._init();
+  }
+
+  _init() {
+    var $ = this.$;
+    $.event.special.swipe = { setup: init };
+
+    $.each(['left', 'up', 'down', 'right'], function () {
+      $.event.special[`swipe${this}`] = { setup: function(){
+        $(this).on('swipe', $.noop);
+      } };
+    });
+  }
+}
+
+/****************************************************
+ * As far as I can tell, both setupSpotSwipe and    *
+ * setupTouchHandler should be idempotent,          *
+ * because they directly replace functions &        *
+ * values, and do not add event handlers directly.  *
+ ****************************************************/
+
+Touch.setupSpotSwipe = function($) {
+  $.spotSwipe = new SpotSwipe($);
+};
+
+/****************************************************
+ * Method for adding pseudo drag events to elements *
+ ***************************************************/
+Touch.setupTouchHandler = function($) {
+  $.fn.addTouch = function(){
+    this.each(function(i,el){
+      $(el).bind('touchstart touchmove touchend touchcancel', function(event)  {
+        //we pass the original event object because the jQuery event
+        //object is normalized to w3c specs and does not provide the TouchList
+        handleTouch(event);
+      });
+    });
+
+    var handleTouch = function(event){
+      var touches = event.changedTouches,
+          first = touches[0],
+          eventTypes = {
+            touchstart: 'mousedown',
+            touchmove: 'mousemove',
+            touchend: 'mouseup'
+          },
+          type = eventTypes[event.type],
+          simulatedEvent
+        ;
+
+      if('MouseEvent' in window && typeof window.MouseEvent === 'function') {
+        simulatedEvent = new window.MouseEvent(type, {
+          'bubbles': true,
+          'cancelable': true,
+          'screenX': first.screenX,
+          'screenY': first.screenY,
+          'clientX': first.clientX,
+          'clientY': first.clientY
+        });
+      } else {
+        simulatedEvent = document.createEvent('MouseEvent');
+        simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0/*left*/, null);
+      }
+      first.target.dispatchEvent(simulatedEvent);
+    };
+  };
+};
+
+Touch.init = function($) {
+  if(typeof($.spotSwipe) === 'undefined') {
+    Touch.setupSpotSwipe($);
+    Touch.setupTouchHandler($);
+  }
+};
+
+
+
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -21458,165 +21617,6 @@ return jQuery;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Touch; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-//**************************************************
-//**Work inspired by multiple jquery swipe plugins**
-//**Done by Yohai Ararat ***************************
-//**************************************************
-
-
-
-var Touch = {};
-
-var startPosX,
-    startPosY,
-    startTime,
-    elapsedTime,
-    isMoving = false;
-
-function onTouchEnd() {
-  //  alert(this);
-  this.removeEventListener('touchmove', onTouchMove);
-  this.removeEventListener('touchend', onTouchEnd);
-  isMoving = false;
-}
-
-function onTouchMove(e) {
-  if (__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.preventDefault) { e.preventDefault(); }
-  if(isMoving) {
-    var x = e.touches[0].pageX;
-    var y = e.touches[0].pageY;
-    var dx = startPosX - x;
-    var dy = startPosY - y;
-    var dir;
-    elapsedTime = new Date().getTime() - startTime;
-    if(Math.abs(dx) >= __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.moveThreshold && elapsedTime <= __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.spotSwipe.timeThreshold) {
-      dir = dx > 0 ? 'left' : 'right';
-    }
-    // else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
-    //   dir = dy > 0 ? 'down' : 'up';
-    // }
-    if(dir) {
-      e.preventDefault();
-      onTouchEnd.call(this);
-      __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this).trigger('swipe', dir).trigger(`swipe${dir}`);
-    }
-  }
-}
-
-function onTouchStart(e) {
-  if (e.touches.length == 1) {
-    startPosX = e.touches[0].pageX;
-    startPosY = e.touches[0].pageY;
-    isMoving = true;
-    startTime = new Date().getTime();
-    this.addEventListener('touchmove', onTouchMove, false);
-    this.addEventListener('touchend', onTouchEnd, false);
-  }
-}
-
-function init() {
-  this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
-}
-
-function teardown() {
-  this.removeEventListener('touchstart', onTouchStart);
-}
-
-class SpotSwipe {
-  constructor($) {
-    this.version = '1.0.0';
-    this.enabled = 'ontouchstart' in document.documentElement;
-    this.preventDefault = false;
-    this.moveThreshold = 75;
-    this.timeThreshold = 200;
-    this.$ = $;
-    this._init();
-  }
-
-  _init() {
-    var $ = this.$;
-    $.event.special.swipe = { setup: init };
-
-    $.each(['left', 'up', 'down', 'right'], function () {
-      $.event.special[`swipe${this}`] = { setup: function(){
-        $(this).on('swipe', $.noop);
-      } };
-    });
-  }
-}
-
-/****************************************************
- * As far as I can tell, both setupSpotSwipe and    *
- * setupTouchHandler should be idempotent,          *
- * because they directly replace functions &        *
- * values, and do not add event handlers directly.  *
- ****************************************************/
-
-Touch.setupSpotSwipe = function($) {
-  $.spotSwipe = new SpotSwipe($);
-};
-
-/****************************************************
- * Method for adding pseudo drag events to elements *
- ***************************************************/
-Touch.setupTouchHandler = function($) {
-  $.fn.addTouch = function(){
-    this.each(function(i,el){
-      $(el).bind('touchstart touchmove touchend touchcancel', function(event)  {
-        //we pass the original event object because the jQuery event
-        //object is normalized to w3c specs and does not provide the TouchList
-        handleTouch(event);
-      });
-    });
-
-    var handleTouch = function(event){
-      var touches = event.changedTouches,
-          first = touches[0],
-          eventTypes = {
-            touchstart: 'mousedown',
-            touchmove: 'mousemove',
-            touchend: 'mouseup'
-          },
-          type = eventTypes[event.type],
-          simulatedEvent
-        ;
-
-      if('MouseEvent' in window && typeof window.MouseEvent === 'function') {
-        simulatedEvent = new window.MouseEvent(type, {
-          'bubbles': true,
-          'cancelable': true,
-          'screenX': first.screenX,
-          'screenY': first.screenY,
-          'clientX': first.clientX,
-          'clientY': first.clientY
-        });
-      } else {
-        simulatedEvent = document.createEvent('MouseEvent');
-        simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0/*left*/, null);
-      }
-      first.target.dispatchEvent(simulatedEvent);
-    };
-  };
-};
-
-Touch.init = function($) {
-  if(typeof($.spotSwipe) === 'undefined') {
-    Touch.setupSpotSwipe($);
-    Touch.setupTouchHandler($);
-  }
-};
-
-
-
-
-/***/ }),
 /* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -24375,7 +24375,7 @@ module.exports = __webpack_require__(49);
 
 __webpack_require__(22);
 
-window.$ = window.jQuery = __webpack_require__(10);
+// window.$ = window.jQuery = require('jquery');
 __webpack_require__(43);
 var bootstrap = __webpack_require__(46);
 
@@ -24385,11 +24385,12 @@ var bootstrap = __webpack_require__(46);
 
 window._ = __webpack_require__(23);
 try {
-    window.$ = window.jQuery = __webpack_require__(10);
+    window.$ = window.jQuery = __webpack_require__(11);
 
     __webpack_require__(26);
 } catch (e) {}
 
+Foundation.addToJquery($);
 $(document).foundation();
 
 /***/ }),
@@ -41556,7 +41557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__js_foundation_util_motion__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__js_foundation_util_nest__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__js_foundation_util_timer__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__js_foundation_util_touch__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__js_foundation_util_touch__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__js_foundation_util_triggers__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__js_foundation_abide__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__js_foundation_accordion__ = __webpack_require__(13);
@@ -44461,7 +44462,7 @@ OffCanvas.defaults = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__foundation_util_imageLoader__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__foundation_util_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__foundation_plugin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__foundation_util_touch__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__foundation_util_touch__ = __webpack_require__(10);
 
 
 
@@ -45948,7 +45949,7 @@ Reveal.defaults = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__foundation_util_motion__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__foundation_util_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__foundation_plugin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__foundation_util_touch__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__foundation_util_touch__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__foundation_util_triggers__ = __webpack_require__(5);
 
 
@@ -48107,7 +48108,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function(root, factory) {
 	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10),__webpack_require__(44),__webpack_require__(45)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(11),__webpack_require__(44),__webpack_require__(45)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

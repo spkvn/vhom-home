@@ -5,4 +5,5 @@ try {
     require('foundation-sites');
 } catch (e) {}
 
+Foundation.addToJquery($);
 $(document).foundation();

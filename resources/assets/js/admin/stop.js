@@ -1,11 +1,11 @@
 //delete modal handler
 $(function () {
-    let $deleteModal = $('#delete-modal').foundation();
-    let $deleteButton = $deleteModal.find('.delete');
-    let deleteHandlers = [];
+    var $deleteModal = $('#delete-modal').foundation();
+    var $deleteButton = $deleteModal.find('.delete');
+    var deleteHandlers = [];
 
     function addDeleteHandler(handler) {
-        let wrappedHandler = function(e) {
+        var wrappedHandler = function(e) {
             handler();
             $deleteModal.foundation('close');
         };
@@ -22,7 +22,7 @@ $(function () {
     });
 
     $('.delete__form').each(function(index, el) {
-        let $form = $(el);
+        var $form = $(el);
         $form.click(function(e) {
             e.preventDefault();
             $deleteModal.foundation('open');

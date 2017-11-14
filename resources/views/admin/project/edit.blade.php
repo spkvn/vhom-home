@@ -86,21 +86,31 @@
         var tags = [
             @foreach ($tags as $tag)
             {
-                tag: "{{$tag->name}}"
+                tag: "{{$tag->name}}",
+                value: "{{$tag->id}}"
             },
             @endforeach
         ];
 
         $(function(){
             $('#tags').selectize({
-                create:true
+                delimiter: ',',
+                persist: false,
+                valueField: 'value',
+                labelField: 'tag',
+                searchField: 'tag',
+                options: tags,
+                create: function(input) {
+                    return {
+                        tag: input,
+                        value: input
+                    }
+                }
             });
 
-            var selectize_tags = $('#tags')[0].selectize;
-            selectize_tags.addOption(tags);
             @if(isset($relatedTags))
-                @foreach ($relatedTags as $relatedTag)
-                    selectize_tags.addItem('{{$relatedTag->name}}');
+                @foreach($relatedTags as $relatedTag)
+            $('#tags')[0].selectize.addItem({{$relatedTag->id}});
                 @endforeach
             @endif
         });
