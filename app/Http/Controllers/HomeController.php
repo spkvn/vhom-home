@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::all()->sortByDesc('created_at');
         return view('site.home')
             ->with('projects', $projects);
     }
