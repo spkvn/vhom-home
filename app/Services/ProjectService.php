@@ -48,7 +48,7 @@ class ProjectService
         foreach($tags as $tag)
         {
             $tag = Tag::find($tag);
-            
+
             $tag->projects()->save($project);
         }
     }
