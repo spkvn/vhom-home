@@ -14,11 +14,28 @@
   align-items: flex-end;
   justify-content: flex-end;
   height:inherit;
+  color:white;
   h1
   {
-    color:white;
     font-weight: bold;
     margin-right:2%;
+  }
+  a:link
+  {
+    color:white;
+  }
+  a:visited
+  {
+    color: #BBBBBB;
+  }
+  a:hover
+  {
+    color: #EEEEEE;
+  }
+  a:active
+  {
+    background:#FFFFFF;
+    color: #000000;
   }
 }
 

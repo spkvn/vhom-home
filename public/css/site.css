@@ -22,12 +22,29 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
   height: inherit;
+  color: white;
 }
 
 .main__img__flex h1 {
-  color: white;
   font-weight: bold;
   margin-right: 2%;
+}
+
+.main__img__flex a:link {
+  color: white;
+}
+
+.main__img__flex a:visited {
+  color: #BBBBBB;
+}
+
+.main__img__flex a:hover {
+  color: #EEEEEE;
+}
+
+.main__img__flex a:active {
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .projects__row {
