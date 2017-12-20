@@ -19,7 +19,7 @@
         </div>
         @foreach($projects as $project)
             <div class="row project__div ">
-                <div class="columns small-7">
+                <div class="columns large-7 small-12">
                     <h2>
                         <a href="{{$project->project_url}}">{{$project->title}}</a>
                     </h2>
@@ -31,11 +31,12 @@
                         @endforeach
                     </p>
                 </div>
-                <div class="columns small-5">
+                <div class="columns large-5 small-12">
                     <div class="project__image__container">
                         <img src="{{asset($project->image_path)}}" alt="">
                     </div>
                 </div>
+
             </div>
         @endforeach
     </div>
