@@ -1,13 +1,37 @@
-<div class="top-bar">
-    <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">vhom.org</li>
-        </ul>
-    </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-            <li><a href="{{route('home')}}">Projects</a></li>
-            <li><a href="{{route('login')}}">Admin</a></li>
-        </ul>
-    </div>
-</div>
+<ul>
+    <li>
+        <a href="#">
+            <span class="lnr lnr-home"></span>
+            <br>
+            home
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <span class="lnr lnr-leaf"></span>
+            <br>
+            projects
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <span class="lnr lnr-pencil"></span>
+            <br>
+            posts
+        </a>
+    </li>
+    <li>
+        <a href="{{route('admin.index')}}">
+            <span class="lnr lnr-magic-wand"></span>
+            <br>
+            admin
+        </a>
+    </li>
+    <li>
+        <a href="#">
+            <span class="lnr lnr-chevron-right-circle"></span>
+            <br>
+            expand
+        </a>
+    </li>
+</ul>

@@ -1,67 +1,25 @@
-.site__main__img
-{
-  background-image: url('http://dev.vhom.org/img/jellyfish.jpg'); //take note to remove dev.
-  background-size:cover;
-  left:0px;
-  top:0px;
-  width:100%;
-  height:60vh;
-}
-
-.main__img__flex
-{
-  display:flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  height:inherit;
-  color:white;
-  h1
-  {
-    font-weight: bold;
-    margin-right:2%;
-  }
-  a:link
-  {
-    color:white;
-  }
-  a:visited
-  {
-    color: #BBBBBB;
-  }
-  a:hover
-  {
-    color: #EEEEEE;
-  }
-  a:active
-  {
-    background:#FFFFFF;
-    color: #000000;
+*{
+  font-family:"Raleway","Helvetica Neue","Helvetica","Arial";
+  h1,h2,h3,h4,h5,h6{
+    font-family:"Roboto Slab","Helvetica Neue","Arial";
+    & *{
+      font-family:"Roboto Slab","Helvetica Neue","Arial";
+    }
   }
 }
 
-.projects__row
+div.top-grid-row
 {
-  padding-top:2%;
-  background-color: black;
-  color:white;
-  h1
+  & > div.cell
   {
-    font-weight:bold;
+    height:275px;
   }
 }
 
-.project__div
-{
-  margin-bottom:2%;
+div.cell{
+  &.raised{
+    border:1px solid darken($background-color, 5%);
+    box-shadow: 5px 5px px darken($background-color,10%);
+    background-color: white;
+  }
 }
-
-//.tag
-//{
-//  background:#8c8c8c;
-//  color:white;
-//  text-transform:lowercase;
-//  padding: 3px 6px 3px 6px;
-//  border-bottom:1px solid white;
-//  border-left:1px solid white;
-//
-//}

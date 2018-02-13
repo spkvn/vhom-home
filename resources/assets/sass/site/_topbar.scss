@@ -1,4 +1,51 @@
-.top-bar
+$menu-color : #0C3D5D;
+$background-color: #F2F2F2;
+div.left-menu
 {
-  color: #FFFFFF;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:100px;
+  background-color:$menu-color;
+  ul
+  {
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+    list-style: none;
+    color:white;
+    margin:0;
+    li{
+      color:white !important;
+      & > a {
+        color:white;
+        transition: color 0.25s ease-in;
+        &:hover,&:active{
+          color:darkorange;
+        }
+      }
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      transition: background-color 0.25s ease-in;
+      &:hover {
+        background-color: lighten($menu-color,2%);
+      }
+    }
+  }
+}
+
+div.page-content
+{
+  position:absolute;
+  top:0;
+  left:100px;
+  right:0;
+  bottom:0;
+  background-color:$background-color;
 }
