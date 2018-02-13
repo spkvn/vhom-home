@@ -4,7 +4,7 @@ div.left-menu {
   left: 0;
   bottom: 0;
   width: 100px;
-  background-color: #0C3D5D;
+  background-color: #0d4366;
 }
 
 div.left-menu ul {
@@ -57,7 +57,7 @@ div.left-menu ul li > a:active {
 }
 
 div.left-menu ul li:hover {
-  background-color: #0d4366;
+  background-color: #0e496f;
 }
 
 div.page-content {
@@ -65,7 +65,6 @@ div.page-content {
   top: 0;
   left: 100px;
   right: 0;
-  bottom: 0;
   background-color: #F2F2F2;
 }
 
@@ -91,14 +90,75 @@ div.page-content {
   font-family: "Roboto Slab","Helvetica Neue","Arial";
 }
 
+* a {
+  -webkit-transition: color 0.25s ease-in;
+  transition: color 0.25s ease-in;
+}
+
+* a:hover,
+* a:active {
+  color: darkorange;
+}
+
 div.top-grid-row > div.cell {
   height: 275px;
 }
 
+div.body-grid-row > div.cell {
+  height: 350px;
+}
+
 div.cell.raised {
-  border: 1px solid #e5e5e5;
-  -webkit-box-shadow: 5px 5px px #d9d8d8;
-          box-shadow: 5px 5px px #d9d8d8;
+  border: 2px solid #bfbfbf;
+  -webkit-box-shadow: 2px 2px 2px #bfbfbf;
+          box-shadow: 2px 2px 2px #bfbfbf;
+}
+
+div.cell.white {
   background-color: white;
+}
+
+div.cell.primary {
+  background-color: #0C3D5D;
+  color: white;
+}
+
+div.cell.secondary {
+  color: white;
+  background-color: #275777;
+}
+
+div.cell.tertiary {
+  color: white;
+  background-color: #0c5d2c;
+}
+
+div.cell.lower-right-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+div.cell.image {
+  color: white;
+  background-size: cover;
+}
+
+div.cell.right-align {
+  text-align: right;
+}
+
+p.extra-large {
+  font-size: 40pt;
 }
 

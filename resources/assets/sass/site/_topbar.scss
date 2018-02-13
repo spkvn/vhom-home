@@ -1,4 +1,4 @@
-$menu-color : #0C3D5D;
+$menu-color : lighten(#0C3D5D,2%);
 $background-color: #F2F2F2;
 div.left-menu
 {
@@ -46,6 +46,5 @@ div.page-content
   top:0;
   left:100px;
   right:0;
-  bottom:0;
   background-color:$background-color;
 }
