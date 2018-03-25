@@ -60,56 +60,23 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 50);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 50:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(51);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
 
-/***/ 51:
+/***/ 6:
 /***/ (function(module, exports) {
 
-//delete modal handler
-$(function () {
-    var $deleteModal = $('#delete-modal').foundation();
-    var $deleteButton = $deleteModal.find('.delete');
-    var deleteHandlers = [];
-
-    function addDeleteHandler(handler) {
-        var wrappedHandler = function wrappedHandler(e) {
-            handler();
-            $deleteModal.foundation('close');
-        };
-        $deleteButton.one('click', wrappedHandler);
-        deleteHandlers.push(wrappedHandler);
-    }
-
-    // Clear delete handlers when the modal closes
-    $deleteModal.on('closed.zf.reveal', function () {
-        deleteHandlers.forEach(function (handler) {
-            $deleteButton.off('click', handler);
-        });
-        deleteHandlers = [];
-    });
-
-    $('.delete__form').each(function (index, el) {
-        var $form = $(el);
-        $form.click(function (e) {
-            e.preventDefault();
-            $deleteModal.foundation('open');
-            addDeleteHandler(function () {
-                $form.submit();
-            });
-        });
-    });
-});
+throw new Error("Module build failed: ReferenceError: [BABEL] /home/kevin/Documents/vhom-home/resources/assets/js/admin/stop.js: Unknown option: direct.presets\n    at Logger.error (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/file/logger.js:58:11)\n    at OptionManager.mergeOptions (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/file/options/option-manager.js:126:29)\n    at OptionManager.init (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/file/options/option-manager.js:216:10)\n    at File.initOptions (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/file/index.js:147:75)\n    at new File (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/file/index.js:137:22)\n    at Pipeline.transform (/home/kevin/Documents/vhom-home/node_modules/babel-core/lib/transformation/pipeline.js:164:16)\n    at transpile (/home/kevin/Documents/vhom-home/node_modules/babel-loader/lib/index.js:50:20)\n    at /home/kevin/Documents/vhom-home/node_modules/babel-loader/lib/fs-cache.js:118:18\n    at ReadFileContext.callback (/home/kevin/Documents/vhom-home/node_modules/babel-loader/lib/fs-cache.js:31:21)\n    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:367:13)");
 
 /***/ })
 

@@ -7886,48 +7886,48 @@ table {
   border-radius: 0;
 }
 
-thead,
-tbody,
-tfoot {
+table thead,
+table tbody,
+table tfoot {
   border: 1px solid #f1f1f1;
   background-color: #fefefe;
 }
 
-caption {
+table caption {
   padding: 0.5rem 0.625rem 0.625rem;
   font-weight: bold;
 }
 
-thead {
+table thead {
   background: #f8f8f8;
   color: #0a0a0a;
 }
 
-tfoot {
+table tfoot {
   background: #f1f1f1;
   color: #0a0a0a;
 }
 
-thead tr,
-tfoot tr {
+table thead tr,
+table tfoot tr {
   background: transparent;
 }
 
-thead th,
-thead td,
-tfoot th,
-tfoot td {
+table thead th,
+table thead td,
+table tfoot th,
+table tfoot td {
   padding: 0.5rem 0.625rem 0.625rem;
   font-weight: bold;
   text-align: left;
 }
 
-tbody th,
-tbody td {
+table tbody th,
+table tbody td {
   padding: 0.5rem 0.625rem 0.625rem;
 }
 
-tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   border-bottom: 0;
   background-color: #f1f1f1;
 }
@@ -15060,48 +15060,48 @@ table {
   border-radius: 0;
 }
 
-thead,
-tbody,
-tfoot {
+table thead,
+table tbody,
+table tfoot {
   border: 1px solid #f1f1f1;
   background-color: #fefefe;
 }
 
-caption {
+table caption {
   padding: 0.5rem 0.625rem 0.625rem;
   font-weight: bold;
 }
 
-thead {
+table thead {
   background: #f8f8f8;
   color: #0a0a0a;
 }
 
-tfoot {
+table tfoot {
   background: #f1f1f1;
   color: #0a0a0a;
 }
 
-thead tr,
-tfoot tr {
+table thead tr,
+table tfoot tr {
   background: transparent;
 }
 
-thead th,
-thead td,
-tfoot th,
-tfoot td {
+table thead th,
+table thead td,
+table tfoot th,
+table tfoot td {
   padding: 0.5rem 0.625rem 0.625rem;
   font-weight: bold;
   text-align: left;
 }
 
-tbody th,
-tbody td {
+table tbody th,
+table tbody td {
   padding: 0.5rem 0.625rem 0.625rem;
 }
 
-tbody tr:nth-child(even) {
+table tbody tr:nth-child(even) {
   border-bottom: 0;
   background-color: #f1f1f1;
 }
